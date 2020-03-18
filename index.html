@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Python Collections</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="接口自动化测试平台">
+  <link rel="Shortcut Icon" href="img/favicon.ico">
+  <link rel="Bookmark" href="img/favicon.ico">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+  <style type="text/css">
+    #foot {
+      background: #f5f6f5;
+      border-top: 1px solid #ebebeb;
+      text-align: left;
+      height: 42px;
+      line-height: 42px;
+      margin-top: 40px;
+    }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="foot"><div style="float:right">浙ICP备20007518号</div></div>
+  <script>
+    var gitalkConfig = {
+      clientID: '41dc28805b0ee32a181c',
+      clientSecret: '8e4ae6a827432eb3263806a99d3636caf076b4de',
+      repo: 'python_collections',
+      owner: 'cs-awater',
+      admin: ["cs-awater"],
+      distractionFreeMode: false
+    };
+    window.$docsify = {
+      name: 'Python Collections',
+      nameLink: '#/',
+      logo: '/img/cover.png',
+      repo: 'https://github.com/cs-awater/python_collections',
+      auto2top: true,
+      coverpage: true,
+      // loadNavbar: true,
+      loadSidebar: true,
+      subMaxLevel: 3,
+      search: {
+        placeholder: '🔍 搜索',
+        noData: '😞 找不到结果',
+      },
+      pagination: {
+        previousText: 'PREVIOUS',
+        nextText: 'NEXT',
+        crossChapter: true
+      },
+      plugins: [
+        function (hook, vm) {
+          hook.doneEach(function() {
+            var label, domObj, main, divEle, gitalk;
+            label = vm.route.path.split("/").pop();
+            domObj = Docsify.dom;
+            main = domObj.getNode("#main");
+
+            Array.apply(
+              null,
+              document.querySelectorAll("div.gitalk-container")
+            ).forEach(function(ele) {
+              ele.remove();
+            });
+
+            divEle = domObj.create("div");
+            divEle.id = "gitalk-container-" + label;
+            divEle.className = "gitalk-container";
+            divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
+            domObj.appendTo(domObj.find(".content"), divEle);
+            gitalk = new Gitalk(
+              Object.assign(gitalkConfig, { id: !label ? "home" : label })
+            );
+            gitalk.render("gitalk-container-" + label);
+          });
+        }
+      ]
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-python.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-java.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-yaml.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-json.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+
+</body>
+</html>
